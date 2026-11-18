@@ -107,11 +107,11 @@ void consultar_registros(Paciente *inicio){
 
     while(atual != NULL){
         printf("--------------------------------\n");
-        printf("Nome: %s ", atual->nome);
-        printf("Sexo: %s", atual->sexo);
+        printf("Nome: %s\n", atual->nome);
+        printf("Sexo: %s\n", atual->sexo);
         printf("Idade: %d\n", atual->idade);
-        printf("Alergias: %s", atual->alergia);
-        printf("Descricao: %s", atual->problema);
+        printf("Alergias: %s\n", atual->alergia);
+        printf("Descricao: %s\n", atual->problema);
         printf("Quarto: %d\n", atual->quarto);
         atual = atual->proximo;
     }
@@ -304,7 +304,10 @@ void analisar_registros(Paciente *inicio){
     printf("----------------------------------\n");
 }
 
-
+// FUNÇÃO REMOVER QUEBRA DE LINHA
+void remover_enter(char texto[]){
+    texto[strcspn(texto, "\n")] = '\0';
+}
 
 
 // CÓDIGO PRINCIPAL
@@ -329,7 +332,7 @@ int main(void){
         while(getchar() != '\n'){}
 
         switch(menu){
-            case 1: 
+            case 1: {
                 char nome[50], sexo[20], alergia[150], problema[200];
                 int idade;
 
@@ -339,9 +342,11 @@ int main(void){
 
                 printf("Nome do paciente: ");
                 fgets(nome, sizeof(nome), stdin);
+                remover_enter(nome);
 
                 printf("\nSexo do paciente: ");
                 fgets(sexo, sizeof(sexo), stdin);
+                remover_enter(sexo);
 
                 printf("\nIdade do paciente: ");
                 if(scanf("%d", &idade) != 1){
@@ -361,9 +366,11 @@ int main(void){
 
                 printf("\nPossui alergias? Quais?\nR: ");
                 fgets(alergia, sizeof(alergia), stdin);
+                remover_enter(alergia);
 
                 printf("\nDescricao do problema:\nR: ");
                 fgets(problema, sizeof(problema), stdin);
+                remover_enter(problema);
 
                 quarto = proximo_quarto(inicio);
                 if(inserir_paciente(&inicio, nome, sexo, idade,
@@ -374,8 +381,8 @@ int main(void){
                 voltar();
                 break;
             
-
-            case 2:
+            }
+            case 2: {
                 printf("===========================\n");
                 printf("  Consulta de Registros\n");
                 printf("===========================\n\n");
@@ -383,8 +390,8 @@ int main(void){
                 consultar_registros(inicio);
                 voltar();
                 break;
-
-            case 3:
+            }
+            case 3: {
                 printf("===========================\n");
                 printf("     Buscar Paciente\n");
                 printf("===========================\n\n");
@@ -423,19 +430,19 @@ int main(void){
                     printf("\n     PACIENTE ENCONTRADO\n");
                     printf("----------------------------\n");
                     printf("Quarto: %d\n", encontrado->quarto);
-                    printf("Nome: %s", encontrado->nome);
-                    printf("Sexo: %s", encontrado->sexo);
+                    printf("Nome: %s\n", encontrado->nome);
+                    printf("Sexo: %s\n", encontrado->sexo);
                     printf("Idade: %d\n", encontrado->idade);
-                    printf("Alergias: %s", encontrado->alergia);
-                    printf("Descricao: %s", encontrado->problema);
+                    printf("Alergias: %s\n", encontrado->alergia);
+                    printf("Descricao: %s\n", encontrado->problema);
                     printf("----------------------------\n");
                 }else if(opcao_busca == 1 || opcao_busca == 2){
                     printf("\nPACIENTE NAO ENCONTRADO!\n");
                 }
                 voltar();
                 break;
-
-            case 4:
+            }
+            case 4: {
                 printf("===========================\n");
                 printf("   Organizar Registros\n");
                 printf("===========================\n");
@@ -462,8 +469,8 @@ int main(void){
                 }
                 voltar();
                 break;
-
-            case 5:
+            }
+            case 5: {
                 printf("===========================\n");
                 printf("     Excluir Paciente\n");
                 printf("===========================\n");
@@ -485,8 +492,8 @@ int main(void){
                 }
                 voltar();
                 break;
-
-            case 6:
+            }
+            case 6: {
                 printf("===========================\n");
                 printf("     Editar Paciente\n");
                 printf("===========================\n");
@@ -526,16 +533,16 @@ int main(void){
                 }
                 voltar();
                 break;
-
-            case 7:
+            }
+            case 7: {
                 analisar_registros(inicio);
                 voltar();
                 break;    
-
-            case 8:
+            }
+            case 8: {
                 printf("\nEncerrando o programa...\n");
                 break;
-
+            }
             default:
                 printf("\nOpcao invalida!\n");
                 voltar();
